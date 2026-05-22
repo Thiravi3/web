@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Gallery - THI YT3</title>
+
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Poppins:wght@400;600;700&display=swap"
+		rel="stylesheet">
+
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Montserrat', sans-serif;
+			background: linear-gradient(-45deg, #000000, #232526, #414345, #888888);
+			background-size: 400% 400%;
+			animation: gradientBG 12s ease-in-out infinite;
+			color: #fff;
+			overflow-x: hidden;
+		}
+
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		@keyframes gradientBG {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		@keyframes frameIn {
+			0% {
+				opacity: 0;
+				transform: translateY(22px) scale(0.96);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+			}
+		}
+
+		/* Navbar */
+
+		nav {
+			background: #f4c91f;
+			overflow: hidden;
+		}
+
+		nav a {
+			float: left;
+			display: block;
+			color: #fff;
+			text-decoration: none;
+			padding: 14px 16px;
+			font-size: 17px;
+			font-weight: 400;
+			border-radius: 0;
+		}
+
+		nav a:hover {
+			background: #ddd;
+			color: #333;
+		}
+
+		/* Gallery */
+
+		.gallery {
+			padding: 12px 2%;
+			text-align: center;
+			min-height: calc(100vh - 52px);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			position: relative;
+			isolation: isolate;
+		}
+
+		.gallery::before {
+			content: '';
+			position: absolute;
+			inset: 8% -12% auto;
+			height: 280px;
+			z-index: -1;
+			background: radial-gradient(circle at 50% 40%, rgba(255, 215, 0, 0.24), rgba(255, 215, 0, 0));
+			filter: blur(28px);
+			pointer-events: none;
+		}
+
+		.gallery-title {
+			font-size: clamp(28px, 4vw, 44px);
+			margin: 0 0 12px;
+			color: #ffd700;
+		}
+
+		.gallery-grid {
+			width: min(1400px, 100%);
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 14px;
+		}
+
+		.gallery-item {
+			overflow: hidden;
+			border-radius: 10px;
+			border: 2px solid rgba(255, 215, 0, 0.5);
+			background: #111;
+			position: relative;
+			opacity: 0;
+			transform: translateY(22px) scale(0.96);
+			animation: frameIn .7s ease forwards;
+			transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+		}
+
+		.gallery-item::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(165deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0) 46%);
+			mix-blend-mode: screen;
+			opacity: 0.32;
+			pointer-events: none;
+			transition: opacity .28s ease;
+		}
+
+		.gallery-item:hover {
+			transform: translateY(-8px) scale(1.02);
+			box-shadow: 0 16px 30px rgba(0, 0, 0, 0.38);
+			border-color: rgba(255, 215, 0, 0.9);
+		}
+
+		.gallery-item:hover::after {
+			opacity: 0.48;
+		}
+
+		.gallery-item img {
+			width: 100%;
+			height: 220px;
+			object-fit: cover;
+			display: block;
+			--parallax-shift: 0px;
+			--img-scale: 1;
+			transform: translate3d(0, var(--parallax-shift), 0) scale(var(--img-scale));
+			will-change: transform;
+			transition: transform .35s ease;
+		}
+
+		.gallery-item:hover img {
+			--img-scale: 1.06;
+		}
+
+		.gallery-item img.fit-properly {
+			object-fit: cover;
+			object-position: top center;
+		}
+
+		.gallery-item img.fit-up {
+			object-fit: cover;
+			object-position: center 12%;
+		}
+
+		.photo-text {
+			margin: 0;
+			padding: 10px 8px 12px;
+			font-size: 14px;
+			line-height: 1.4;
+			color: #ffe58a;
+			text-align: center;
+		}
+
+		.thank-you {
+			text-align: center;
+			font-size: clamp(20px, 3vw, 30px);
+			font-weight: 600;
+			color: #ffd700;
+			margin: 20px 0 30px;
+		}
+
+		.gallery-item:nth-child(1) {
+			animation-delay: .04s;
+		}
+
+		.gallery-item:nth-child(2) {
+			animation-delay: .08s;
+		}
+
+		.gallery-item:nth-child(3) {
+			animation-delay: .12s;
+		}
+
+		.gallery-item:nth-child(4) {
+			animation-delay: .16s;
+		}
+
+		.gallery-item:nth-child(5) {
+			animation-delay: .20s;
+		}
+
+		.gallery-item:nth-child(6) {
+			animation-delay: .24s;
+		}
+
+		.gallery-item:nth-child(7) {
+			animation-delay: .28s;
+		}
+
+		.gallery-item:nth-child(8) {
+			animation-delay: .32s;
+		}
+
+		.gallery-item:nth-child(9) {
+			animation-delay: .36s;
+		}
+
+		.gallery-item:nth-child(10) {
+			animation-delay: .40s;
+		}
+
+		.gallery-item:nth-child(11) {
+			animation-delay: .44s;
+		}
+
+		.gallery-item:nth-child(12) {
+			animation-delay: .48s;
+		}
+
+		.gallery-item:nth-child(13) {
+			animation-delay: .52s;
+		}
+
+		.gallery-item:nth-child(14) {
+			animation-delay: .56s;
+		}
+
+		.gallery-item:nth-child(15) {
+			animation-delay: .60s;
+		}
+
+		.gallery-item:nth-child(16) {
+			animation-delay: .64s;
+		}
+
+		@media (max-width:1024px) {
+			.gallery-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (max-width:640px) {
+
+			body,
+			nav a,
+			.gallery-title,
+			.photo-text,
+			.thank-you {
+				font-family: 'Poppins', Arial, sans-serif;
+			}
+
+			nav {
+				overflow: visible;
+			}
+
+			nav a {
+				float: none;
+				width: 100%;
+				padding: 12px 10px;
+				font-size: 15px;
+				text-align: center;
+			}
+
+			.gallery-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.gallery-item img {
+				height: 260px;
+			}
+		}
+
+		@media (prefers-reduced-motion:reduce) {
+
+			.gallery-item,
+			.gallery-item img {
+				animation: none;
+				transition: none;
+			}
+
+			.gallery-item img {
+				--parallax-shift: 0px;
+			}
+		}
+
+		/* Popup */
+
+		.popup {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.9);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+		}
+
+		.popup img {
+			width: min(90vw, 900px);
+			max-height: 90vh;
+			height: auto;
+			border-radius: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<nav>
+		<a href="index.html">HOME</a>
+		<a href="home.html">THI EDITZ</a>
+		<a href="about.html">ABOUT</a>
+		<a href="gallery.html">GALLERY</a>
+	</nav>
+
+	<section class="gallery">
+
+		<h1 class="gallery-title">MY CAPTAIN</h1>
+
+		<div class="gallery-grid">
+
+			<div class="gallery-item"><img src="1DHONI.jpeg" alt="DEBUT MATCH IN INTERNATIONAL CRICKET" loading="eager"
+					decoding="async">
+				<p class="photo-text">FIRST INTERNATIONAL MATCH.</p>
+			</div>
+			<div class="gallery-item"><img src="6 DHONI.jpeg" alt="MS Dhoni" class="fit-properly" loading="lazy"
+					decoding="async">
+				<p class="photo-text">1ST INTERNATIONAL CENTURY.</p>
+			</div>
+			<div class="gallery-item"><img src="8 DHONI.jpeg" alt="Dhoni portrait" loading="lazy" decoding="async">
+				<p class="photo-text">CAPTAIN ERA BEGINS.</p>
+			</div>
+			<div class="gallery-item"><img src="7 DHONI.jpeg" alt="Thala image" loading="lazy" decoding="async">
+				<p class="photo-text">T20 WORLD CUP VICTORY.</p>
+			</div>
+			<div class="gallery-item"><img src="5 DHONI.jpeg" alt="Dhoni close up" loading="lazy" decoding="async">
+				<p class="photo-text">2008 IPL DEBUT AS CAPTAIN.</p>
+			</div>
+			<div class="gallery-item"><img src="3 DHONI.jpeg" alt="Dhoni photo edit" loading="lazy" decoding="async">
+				<p class="photo-text">1ST IPL TROPHY.</p>
+			</div>
+			<div class="gallery-item"><img src="4 DHONI.jpeg" alt="Madara style edit" loading="lazy" decoding="async">
+				<p class="photo-text">ODI WORLD CUP VICTORY.</p>
+			</div>
+			<div class="gallery-item"><img src="2 DHONI.jpeg" alt="MS Dhoni champion frame" loading="lazy"
+					decoding="async">
+				<p class="photo-text">2ND IPL TROPHY.</p>
+			</div>
+			<div class="gallery-item"><img src="13.jpeg" alt="Dhoni classic portrait" class="fit-up" loading="lazy"
+					decoding="async">
+				<p class="photo-text">2013 CHAMPIONS TROPHY.</p>
+			</div>
+			<div class="gallery-item"><img src="7 AND 18.jpeg" alt="Thala classic image" loading="lazy"
+					decoding="async">
+				<p class="photo-text">HANDS OVER HIS CAPTAINCY TO VIRAT KOHLI.</p>
+			</div>
+			<div class="gallery-item"><img src="2018 DHONI.jpeg" alt="MS Dhoni stadium moment" class="fit-properly"
+					loading="lazy" decoding="async">
+				<p class="photo-text">3RD IPL TROPHY.</p>
+			</div>
+			<div class="gallery-item"><img src="19 DHONI.jpeg" alt="Mahender Singh Dhoni portrait" loading="lazy"
+					decoding="async">
+				<p class="photo-text">RETIRED FROM INDIAN CRICKET.</p>
+			</div>
+			<div class="gallery-item"><img src="2021 DHONI.jpeg" alt="Dhoni early career frame" loading="lazy"
+					decoding="async">
+				<p class="photo-text">4TH IPL TROPHY.</p>
+			</div>
+			<div class="gallery-item"><img src="23.jpeg" alt="Dhoni action frame" loading="lazy" decoding="async">
+				<p class="photo-text">5TH IPL TROPHY.</p>
+			</div>
+			<div class="gallery-item"><img src="FINAL.jpeg" alt="Dhoni calm expression" loading="lazy" decoding="async">
+				<p class="photo-text">END OF CAPTAINCY.</p>
+			</div>
+			<div class="gallery-item"><img src="Thala.jpeg" alt="Dhoni calm expression" loading="lazy" decoding="async">
+				<p class="photo-text">MY CAPTAIN FOREVER.</p>
+			</div>
+		</div>
+
+	</section>
+
+	<p class="thank-you">THANK YOU.</p>
+
+	<script>
+		/* Subtle parallax depth for desktop/tablet cards. */
+		const parallaxImages = Array.from(document.querySelectorAll('.gallery-item img'));
+		const allowParallax =
+		window.matchMedia('(min-width: 768px)').matches &&
+		!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let parallaxTicking = false;
+
+		function updateParallaxPositions() {
+		const viewportHeight = window.innerHeight;
+		const viewportCenter = viewportHeight / 2;
+
+		parallaxImages.forEach((image) => {
+		const rect = image.getBoundingClientRect();
+		if (rect.bottom < 0 || rect.top > viewportHeight) {
+			return;
+		}
+
+		const imageCenter = rect.top + rect.height / 2;
+		const distanceRatio = (imageCenter - viewportCenter) / viewportCenter;
+		const shift = Math.max(-14, Math.min(14, distanceRatio * -12));
+		image.style.setProperty('--parallax-shift', `${shift.toFixed(1)}px`);
+		});
+
+		parallaxTicking = false;
+		}
+
+		function requestParallaxUpdate() {
+		if (parallaxTicking) {
+			return;
+		}
+		parallaxTicking = true;
+		window.requestAnimationFrame(updateParallaxPositions);
+		}
+
+		if (allowParallax) {
+		updateParallaxPositions();
+		window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+		window.addEventListener('resize', requestParallaxUpdate);
+		}
+	</script>
+
+</body>
+
+</html>
